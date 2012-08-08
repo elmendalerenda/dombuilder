@@ -3,35 +3,48 @@
 	
 	var itemsToDisplay = [{name:0},{name:1},{name:2},{name:3},{name:4},{name:5}];
 
-	var createItems = function(){
+	var elementBuilder = function(tagName){
 
+		return function(children){
+			children = children || [];
+
+			var element = document.createElement(tagName);
+
+			for(var i=0; i<children.length; i++){
+				var innerElement = children[i];
+				if(typeof innerElement === 'string')
+					innerElement = document.createTextNode(innerElement);
+
+				element.appendChild(innerElement);
+			}
+
+			return element;
+		};
+	};
+
+	var li = elementBuilder('li');
+	var span = elementBuilder('span');
+	var input = elementBuilder('input');
+	var ul = elementBuilder('ul');
+
+	var createItems = function(){
 		var items = itemsToDisplay.map(function(itemToDisplay){
-			var item = document.createElement('li');
+			var text = span(['The element name is ' + itemToDisplay.name]); 
+
+			var field = input();
+			field.type = 'text';
+
+			var item = li([text, field]);
 			item.className = 'item';
 
-			var text = document.createElement('p');
-			text.innerHTML = 'The element name is ' + itemToDisplay.name;
-
-			var input = document.createElement('input');
-			input.type = 'text';
-
-			item.appendChild(text);
-			item.appendChild(input);
 			return item;
 		});
 
 		return items;
 	};
 
-
-	var list = document.createElement('ul');
+	var list = ul(createItems());
 	list.className = 'mainlist';
-
-
-	var items = createItems();
-	for(var i = 0; i < items.length; i++){
-		list.appendChild(items[i]);
-	}
 	
 
 	document.getElementById('main').appendChild(list);
