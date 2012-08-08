@@ -10,13 +10,14 @@
 
 			var element = document.createElement(tagName);
 
-			for(var i=0; i<children.length; i++){
-				var innerElement = children[i];
+			element = children.reduce(function(reducedElement, child){
+				var innerElement = child;
 				if(typeof innerElement === 'string')
 					innerElement = document.createTextNode(innerElement);
 
-				element.appendChild(innerElement);
-			}
+				reducedElement.appendChild(innerElement);
+				return reducedElement;
+			},element);
 
 			return element;
 		};
