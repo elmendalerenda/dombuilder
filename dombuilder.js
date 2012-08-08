@@ -5,23 +5,21 @@
 
 	var createItems = function(){
 
-		var items = [];
-
-		for(var i = 0; i < itemsToDisplay.length; i++){
+		var items = itemsToDisplay.map(function(itemToDisplay){
 			var item = document.createElement('li');
 			item.className = 'item';
 
 			var text = document.createElement('p');
-			text.innerHTML = 'The element name is ' + itemsToDisplay[i].name;
+			text.innerHTML = 'The element name is ' + itemToDisplay.name;
 
 			var input = document.createElement('input');
 			input.type = 'text';
 
 			item.appendChild(text);
 			item.appendChild(input);
+			return item;
+		});
 
-			items.push(item);
-		}
 		return items;
 	};
 
@@ -34,7 +32,6 @@
 	for(var i = 0; i < items.length; i++){
 		list.appendChild(items[i]);
 	}
-
 	
 
 	document.getElementById('main').appendChild(list);
