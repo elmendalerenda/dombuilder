@@ -5,8 +5,9 @@
 
 	var elementBuilder = function(tagName){
 
-		return function(children){
+		return function(children, props){
 			children = children || [];
+			props = props || [];
 
 			var element = document.createElement(tagName);
 
@@ -19,6 +20,10 @@
 				return reducedElement;
 			},element);
 
+			for(var propertyName in props){
+				element[propertyName] = props[propertyName]; 
+			}
+
 			return element;
 		};
 	};
@@ -30,18 +35,14 @@
 
 	var createItem = function(itemToDisplay){
 		var text = span(['The element name is ' + itemToDisplay.name]); 
+		var field = input(null, {type: 'text'});
 
-		var field = input();
-		field.type = 'text';
-
-		var item = li([text, field]);
-		item.className = 'item';
+		var item = li([text, field], {className: 'item'});
 
 		return item;
 	};
 
-	var list = ul(itemsToDisplay.map(createItem));
-	list.className = 'mainlist';
+	var list = ul(itemsToDisplay.map(createItem), {className: 'mainList'});
 
 	document.getElementById('main').appendChild(list);
 
