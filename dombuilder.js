@@ -28,25 +28,20 @@
 	var input = elementBuilder('input');
 	var ul = elementBuilder('ul');
 
-	var createItems = function(){
-		var items = itemsToDisplay.map(function(itemToDisplay){
-			var text = span(['The element name is ' + itemToDisplay.name]); 
+	var createItem = function(itemToDisplay){
+		var text = span(['The element name is ' + itemToDisplay.name]); 
 
-			var field = input();
-			field.type = 'text';
+		var field = input();
+		field.type = 'text';
 
-			var item = li([text, field]);
-			item.className = 'item';
+		var item = li([text, field]);
+		item.className = 'item';
 
-			return item;
-		});
-
-		return items;
+		return item;
 	};
 
-	var list = ul(createItems());
+	var list = ul(itemsToDisplay.map(createItem));
 	list.className = 'mainlist';
-	
 
 	document.getElementById('main').appendChild(list);
 
