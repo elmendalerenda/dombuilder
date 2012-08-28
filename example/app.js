@@ -4,17 +4,17 @@
 
 	var createItem = function(itemToDisplay){
 
-		var item = DomBuilder.liBuilder([
-			DomBuilder.spanBuilder(['The element name is ' + itemToDisplay.name]),
-			DomBuilder.inputBuilder(null, {type: 'text'})],			
+		var item = DOMBUILDER.liBuilder([
+			DOMBUILDER.spanBuilder(['The element name is ' + itemToDisplay.name]),
+			DOMBUILDER.inputBuilder(null, {type: 'text'})],
 			{className: 'item'}
 		);
 
 		return item;
 	};
 
-	var list = DomBuilder.ulBuilder(
-		itemsToDisplay.map(createItem), 
+	var list = DOMBUILDER.ulBuilder(
+		itemsToDisplay.map(createItem),
 		{className: 'mainList'}
 	);
 
