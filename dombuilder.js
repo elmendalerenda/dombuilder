@@ -1,4 +1,4 @@
-var DOMBUILDER = (function(document) {
+var DOMBUILDER = DOMBUILDER || (function(document) {
 
 	var elementBuilder = function(tagName) {
 			return function(children, properties) {
@@ -40,14 +40,14 @@ var DOMBUILDER = (function(document) {
 		};
 
 	return {
-		elementBuilder: elementBuilder,
-		divBuilder : elementBuilder('div'),
-		pBuilder : elementBuilder('p'),
-		aBuilder : elementBuilder('a'),
-		imgBuilder : elementBuilder('img'),
-		ulBuilder : elementBuilder('ul'),
-		liBuilder : elementBuilder('li'),
-		inputBuilder : elementBuilder('input'),
-		spanBuilder : elementBuilder('span')
+		element: elementBuilder,
+		div: elementBuilder('div'),
+		p: elementBuilder('p'),
+		a: elementBuilder('a'),
+		img: elementBuilder('img'),
+		ul: elementBuilder('ul'),
+		li: elementBuilder('li'),
+		input: elementBuilder('input'),
+		span: elementBuilder('span')
 	};
 })(document);
