@@ -1,24 +1,24 @@
 describe("dombuilder", function() {
 
     it('creates an DOM Element', function(){
-        var element = DOMBUILDER.element('div')();
+        var element = DB.element('div')();
 
         expect(element instanceof Element).toBeTruthy();
         expect(element.tagName).toEqual('DIV');
     });
 
     it('hosts an elements', function(){
-        var li = DOMBUILDER.element('li')();
-        var element = DOMBUILDER.element('ul')(li);
+        var li = DB.element('li')();
+        var element = DB.element('ul')(li);
 
 
         expect(element.firstChild.tagName).toEqual('LI');
     });
 
     it('hosts more than one elements', function(){
-        var aLi = DOMBUILDER.element('li')();
-        var anotherLi = DOMBUILDER.element('li')();
-        var element = DOMBUILDER.element('ul')(
+        var aLi = DB.element('li')();
+        var anotherLi = DB.element('li')();
+        var element = DB.element('ul')(
             [aLi, anotherLi]);
 
         expect(element.children.length).toBe(2);
@@ -26,21 +26,21 @@ describe("dombuilder", function() {
     });
 
     it('hosts text', function(){
-        var element = DOMBUILDER.element('ul')(
+        var element = DB.element('ul')(
             'a test text');
 
         expect(element.innerHTML).toEqual('a test text');
 
-        element = DOMBUILDER.element('ul')(
+        element = DB.element('ul')(
             ['a test text',
-            DOMBUILDER.element('li')()]);
+            DB.element('li')()]);
 
         expect(element.innerHTML).toMatch('a test text');
         expect(element.children[0].tagName).toEqual('LI');
     });
 
     it('assign properties to the element', function(){
-        var element = DOMBUILDER.element('div')(
+        var element = DB.element('div')(
             null,
             {className: 'aClassName', id: 'uniqueId'});
 
@@ -49,16 +49,13 @@ describe("dombuilder", function() {
     });
 
     it('has built-in builders', function(){
-        expect(DOMBUILDER.div().tagName).toEqual('DIV');
-        expect(DOMBUILDER.p().tagName).toEqual('P');
-        expect(DOMBUILDER.a().tagName).toEqual('A');
-        expect(DOMBUILDER.img().tagName).toEqual('IMG');
-        expect(DOMBUILDER.ul().tagName).toEqual('UL');
-        expect(DOMBUILDER.li().tagName).toEqual('LI');
-        expect(DOMBUILDER.input().tagName).toEqual('INPUT');
-        expect(DOMBUILDER.span().tagName).toEqual('SPAN');
+        expect(DB.DIV().tagName).toEqual('DIV');
+        expect(DB.P().tagName).toEqual('P');
+        expect(DB.A().tagName).toEqual('A');
+        expect(DB.IMG().tagName).toEqual('IMG');
+        expect(DB.UL().tagName).toEqual('UL');
+        expect(DB.LI().tagName).toEqual('LI');
+        expect(DB.INPUT().tagName).toEqual('INPUT');
+        expect(DB.SPAN().tagName).toEqual('SPAN');
     });
-
-
-
 });
